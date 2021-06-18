@@ -40,9 +40,9 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_top = 98.0
-margin_right = 1024.0
-margin_bottom = 298.0
+margin_top = 310.0
+margin_right = 600.0
+margin_bottom = 510.0
 rect_min_size = Vector2( 200, 200 )
 size_flags_horizontal = 7
 custom_fonts/font = ExtResource( 4 )
@@ -54,10 +54,10 @@ __meta__ = {
 }
 
 [node name="TextureButton" type="TextureButton" parent="VBoxContainer"]
-margin_left = 412.0
-margin_top = 302.0
-margin_right = 612.0
-margin_bottom = 502.0
+margin_left = 200.0
+margin_top = 514.0
+margin_right = 400.0
+margin_bottom = 714.0
 rect_min_size = Vector2( 200, 200 )
 size_flags_horizontal = 4
 texture_normal = ExtResource( 3 )

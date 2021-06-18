@@ -19,6 +19,12 @@ config/name="ballon-pop"
 run/main_scene="res://asset/menu/menu.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=600
+window/size/height=1024
+window/handheld/orientation="portrait"
+
 [input]
 
 left_click={
@@ -29,4 +35,6 @@ left_click={
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
 environment/default_environment="res://default_env.tres"

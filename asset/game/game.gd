@@ -75,7 +75,7 @@ func get_random_x():
 	var x = _spawn_position.rect_global_position.x
 	var y = _spawn_position.rect_global_position.y
 	var x_size = _spawn_position.rect_size.x 
-	x = _rng.randf_range(x + 250 , x + x_size - 250)
+	x = _rng.randf_range(x + 150 , x + x_size -150)
 	return Vector2(x,y)
 
 func get_random_y():
