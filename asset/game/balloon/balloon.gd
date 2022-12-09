@@ -42,13 +42,14 @@ func _on_balloon_input_event(viewport, event, shape_idx):
 		_audio.play()
 		_is_popping = true
 		emit_signal("on_ballon_pop", _color, global_position)
-
+	
 func _on_AudioStreamPlayer2D_finished():
 	queue_free()
-
-
+	
+	
 func _on_VisibilityNotifier2D_screen_exited():
 	if _is_popping:
 		return
+		
 	emit_signal("on_ballon_missed")
 	queue_free()
