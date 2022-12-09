@@ -4,12 +4,18 @@ onready var _rng = RandomNumberGenerator.new()
 onready var _bg = $bg
 onready var _cloud_spawn_point = $cloud_spawn_point
 onready var _timer = $Timer
+onready var label = $VBoxContainer/Label
 
 onready var _screen_size = get_viewport().get_visible_rect().size
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	spawn_initial_cloud()
+	
+	if OS.has_feature('JavaScript'):
+		label.text = JavaScript.eval("""
+			var url_string = window.location.href;var url = new URL(url_string);url.searchParams.get('name');
+		""")
 
 func _on_Timer_timeout():
 	if _rng.randf() <= 0.1:
