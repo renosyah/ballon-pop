@@ -21,22 +21,30 @@ onready var _bg = $bg
 onready var _spawn_position = $balloon_spawn_point
 onready var _cloud_spawn_point = $cloud_spawn_point
 onready var _timer = $Timer
-onready var _score = $Label
+onready var _score = $ui_panel/score
+onready var _hp = $ui_panel/hp
+onready var _lose_panel = $lose_panel
+onready var _ui_panel = $ui_panel
 
 onready var _screen_size = get_viewport().get_visible_rect().size
 
 var balloon_pools :Array = []
 var popping_pools :Array = []
 
-var score = 0
-var missed = 0
+var score :int = 0
+var hp :int = 10
+var max_hp :int = 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_lose_panel.visible = false
+	_ui_panel.visible = true
+	
 	randomize()
 	spawn_initial_cloud()
 	pooling_balloon()
 	pooling_poping()
+	display_score()
 	
 func _on_Timer_timeout():
 	spawn_balloon(get_random_x())
@@ -98,15 +106,24 @@ func spawn_cloud(from):
 	
 func _on_ballon_pop(bal :Balloon):
 	spawn_poping_fragment(bal.color, bal.global_position)
-	score += 1
-	display_score()
+	
+	if bal.is_dead:
+		score += 1
+		display_score()
  
 func _on_ballon_missed(bal :Balloon):
-	missed += 1
+	if hp < 1:
+		_lose_panel.visible = true
+		_ui_panel.visible = false
+		_timer.stop()
+	else:
+		hp -= 1
+		
 	display_score()
 
 func display_score():
-	_score.text = "Score : " + str(score) + "\nMissed : " + str(missed)
+	_score.text = "Score : " + str(score)
+	_hp.text = "Hp : " + str(hp)
 
 func get_random_x():
 	var x = _spawn_position.rect_global_position.x
@@ -124,3 +141,12 @@ func get_random_y():
 
 func _on_TextureButton_pressed():
 	get_tree().change_scene("res://asset/menu/menu.tscn")
+
+func _on_try_again_pressed():
+	score = 0
+	hp = max_hp
+	display_score()
+	_lose_panel.visible = false
+	_ui_panel.visible = true
+	_timer.start()
+	

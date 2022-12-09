@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://asset/game/game.gd" type="Script" id=1]
 [ext_resource path="res://asset/ui/fonts/montserrat_eb_48.tres" type="DynamicFont" id=2]
+[ext_resource path="res://asset/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=3]
 [ext_resource path="res://asset/game/pause.png" type="Texture" id=4]
+[ext_resource path="res://asset/menu/play.png" type="Texture" id=5]
+[ext_resource path="res://asset/ui/fonts/montserrat_eb_86.tres" type="DynamicFont" id=6]
 
 [node name="game" type="Node"]
 script = ExtResource( 1 )
@@ -26,33 +29,137 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 7.0
 margin_bottom = 89.0
+
+[node name="ui_panel" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+rect_min_size = Vector2( 0, 100 )
+alignment = 1
+
+[node name="MarginContainer4" type="MarginContainer" parent="ui_panel"]
+margin_right = 14.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 14, 0 )
+
+[node name="hp" type="Label" parent="ui_panel"]
+margin_left = 18.0
+margin_top = 30.0
+margin_right = 115.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 80, 0 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+custom_fonts/font = ExtResource( 3 )
+text = "Hp : 4"
+
+[node name="MarginContainer3" type="MarginContainer" parent="ui_panel"]
+margin_left = 119.0
+margin_right = 209.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+
+[node name="score" type="Label" parent="ui_panel"]
+margin_left = 213.0
+margin_top = 24.0
+margin_right = 404.0
+margin_bottom = 76.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+custom_fonts/font = ExtResource( 2 )
+text = "Score : 0"
+align = 1
+valign = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="ui_panel"]
+margin_left = 408.0
+margin_right = 498.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+
+[node name="TextureButton" type="TextureButton" parent="ui_panel"]
+margin_left = 502.0
+margin_top = 10.0
+margin_right = 582.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 80, 80 )
+size_flags_vertical = 4
+texture_normal = ExtResource( 4 )
+expand = true
+
+[node name="MarginContainer5" type="MarginContainer" parent="ui_panel"]
+margin_left = 586.0
+margin_right = 600.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 14, 0 )
+
+[node name="lose_panel" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="title" type="Label" parent="lose_panel"]
+margin_top = 283.0
+margin_right = 600.0
+margin_bottom = 389.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+custom_fonts/font = ExtResource( 6 )
+text = "You lose"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
-modulate = Color( 0.827451, 0.827451, 0.827451, 1 )
-margin_right = 162.0
-margin_bottom = 52.0
+[node name="sub" type="Label" parent="lose_panel"]
+margin_top = 393.0
+margin_right = 600.0
+margin_bottom = 433.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
-text = "Score : 0
-Missed : 0"
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+custom_fonts/font = ExtResource( 3 )
+text = "Try again?"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="lose_panel"]
+margin_top = 437.0
+margin_right = 600.0
+margin_bottom = 537.0
+rect_min_size = Vector2( 0, 100 )
+
+[node name="try_again" type="TextureButton" parent="lose_panel"]
+margin_left = 200.0
+margin_top = 541.0
+margin_right = 400.0
+margin_bottom = 741.0
+rect_min_size = Vector2( 200, 200 )
+size_flags_horizontal = 4
+texture_normal = ExtResource( 5 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
 autostart = true
 
-[node name="TextureButton" type="TextureButton" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -100.0
-margin_bottom = 100.0
-texture_normal = ExtResource( 4 )
-expand = true
-
+[connection signal="pressed" from="ui_panel/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="lose_panel/try_again" to="." method="_on_try_again_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

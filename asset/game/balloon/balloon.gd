@@ -44,9 +44,9 @@ func _on_balloon_input_event(viewport, event, shape_idx):
 			
 		hp -= 1
 		
-		if hp < 0:
+		if hp < 1:
 			set_dead()
-		
+			
 		_audio.play()
 		emit_signal("on_ballon_pop", self)
 		

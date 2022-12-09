@@ -3,7 +3,7 @@ extends Node
 onready var _bg = $bg
 onready var _cloud_spawn_point = $cloud_spawn_point
 onready var _timer = $Timer
-onready var _label = $VBoxContainer/Label
+onready var _player_name = $VBoxContainer/player_name
 
 onready var _screen_size = get_viewport().get_visible_rect().size
 
@@ -13,7 +13,7 @@ func _ready():
 	spawn_initial_cloud()
 	
 	if OS.has_feature('JavaScript'):
-		_label.text = JavaScript.eval("""
+		_player_name.text = JavaScript.eval("""
 			var url_string = window.location.href;
 			var url = new URL(url_string);
 			url.searchParams.get('name');
@@ -45,3 +45,8 @@ func get_random_y():
 	
 func _on_TextureButton_pressed():
 	get_tree().change_scene("res://asset/game/game.tscn")
+	
+	
+	
+	
+	
