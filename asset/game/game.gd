@@ -46,12 +46,18 @@ func _ready():
 	pooling_poping()
 	display_score()
 	
+	_timer.wait_time = rand_range(0.5,1.5)
+	_timer.start()
+	
 func _on_Timer_timeout():
 	spawn_balloon(get_random_x())
 	
 	if randf() > 0.8:
 		spawn_cloud(get_random_y())
 		
+	_timer.wait_time = rand_range(0.5,1.5)
+	_timer.start()
+	
 func spawn_initial_cloud():
 	for i in 5:
 		var _pos = Vector2(
@@ -148,5 +154,6 @@ func _on_try_again_pressed():
 	display_score()
 	_lose_panel.visible = false
 	_ui_panel.visible = true
+	_timer.wait_time = rand_range(0.5,1.5)
 	_timer.start()
 	

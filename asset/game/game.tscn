@@ -158,7 +158,6 @@ __meta__ = {
 }
 
 [node name="Timer" type="Timer" parent="."]
-autostart = true
 
 [connection signal="pressed" from="ui_panel/TextureButton" to="." method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="lose_panel/try_again" to="." method="_on_try_again_pressed"]
