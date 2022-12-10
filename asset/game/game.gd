@@ -95,11 +95,14 @@ func _on_ballon_pop(bal :Balloon):
 		spawn_poping_fragment(bal.color, bal.global_position)
  
 func _on_ballon_missed(bal :Balloon):
+	if _lose_panel.visible:
+		return
+		
 	if hp < 2:
+		WebGameModule.update_scoreboard(score)
 		_lose_panel.visible = true
 		_ui_panel.visible = false
 		_timer.stop()
-		update_scoreboard()
 		
 	else:
 		hp -= 1
@@ -117,19 +120,7 @@ func get_random_x():
 	var x_size = _spawn_position.rect_size.x 
 	x = rand_range(x + 150 , x + x_size -150)
 	return Vector2(x,y)
-	
-func update_scoreboard():
-	var url = Global.base_url + "/api/score/add.php"
-	var query = JSON.print({
-		"id": 0,
-		"game_id": Global.game_id,
-		"player_id": Global.player_id,
-		"player_name": Global.player_name,
-		"score" : score
-	})
-	var headers = ["Content-Type: application/json"]
-	_http_request.request(url, headers, false, HTTPClient.METHOD_POST, query)
-	
+
 func _on_TextureButton_pressed():
 	get_tree().change_scene("res://asset/menu/menu.tscn")
 

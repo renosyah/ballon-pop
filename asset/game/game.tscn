@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://asset/game/game.gd" type="Script" id=1]
 [ext_resource path="res://asset/ui/fonts/montserrat_eb_48.tres" type="DynamicFont" id=2]
 [ext_resource path="res://asset/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=3]
 [ext_resource path="res://asset/game/pause.png" type="Texture" id=4]
 [ext_resource path="res://asset/menu/play.png" type="Texture" id=5]
-[ext_resource path="res://asset/ui/fonts/montserrat_eb_86.tres" type="DynamicFont" id=6]
 [ext_resource path="res://asset/ui/hurt/hurt.tscn" type="PackedScene" id=7]
 [ext_resource path="res://asset/ui/bg/bg.tscn" type="PackedScene" id=8]
 
@@ -34,7 +33,7 @@ rect_min_size = Vector2( 14, 0 )
 [node name="hp" type="Label" parent="ui_panel"]
 margin_left = 18.0
 margin_top = 30.0
-margin_right = 115.0
+margin_right = 128.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 80, 0 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
@@ -43,18 +42,18 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 custom_constants/shadow_as_outline = 1
 custom_fonts/font = ExtResource( 3 )
-text = "Hp : 4"
+text = "Hp : 10"
 
 [node name="MarginContainer3" type="MarginContainer" parent="ui_panel"]
-margin_left = 119.0
-margin_right = 209.0
+margin_left = 132.0
+margin_right = 215.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 
 [node name="score" type="Label" parent="ui_panel"]
-margin_left = 213.0
+margin_left = 219.0
 margin_top = 24.0
-margin_right = 404.0
+margin_right = 410.0
 margin_bottom = 76.0
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -67,7 +66,7 @@ align = 1
 valign = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="ui_panel"]
-margin_left = 408.0
+margin_left = 414.0
 margin_right = 498.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
@@ -89,23 +88,22 @@ margin_bottom = 100.0
 rect_min_size = Vector2( 14, 0 )
 
 [node name="lose_panel" type="VBoxContainer" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 alignment = 1
 
 [node name="title" type="Label" parent="lose_panel"]
-margin_top = 283.0
+margin_top = 310.0
 margin_right = 600.0
-margin_bottom = 389.0
+margin_bottom = 362.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 custom_constants/shadow_as_outline = 1
-custom_fonts/font = ExtResource( 6 )
-text = "You lose"
+custom_fonts/font = ExtResource( 2 )
+text = "Game Over"
 align = 1
 valign = 1
 __meta__ = {
@@ -113,9 +111,9 @@ __meta__ = {
 }
 
 [node name="sub" type="Label" parent="lose_panel"]
-margin_top = 393.0
+margin_top = 366.0
 margin_right = 600.0
-margin_bottom = 433.0
+margin_bottom = 406.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -123,7 +121,7 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 custom_constants/shadow_as_outline = 1
 custom_fonts/font = ExtResource( 3 )
-text = "Try again?"
+text = "Play again?"
 align = 1
 valign = 1
 __meta__ = {
@@ -131,16 +129,16 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="lose_panel"]
-margin_top = 437.0
+margin_top = 410.0
 margin_right = 600.0
-margin_bottom = 537.0
+margin_bottom = 510.0
 rect_min_size = Vector2( 0, 100 )
 
 [node name="try_again" type="TextureButton" parent="lose_panel"]
 margin_left = 200.0
-margin_top = 541.0
+margin_top = 514.0
 margin_right = 400.0
-margin_bottom = 741.0
+margin_bottom = 714.0
 rect_min_size = Vector2( 200, 200 )
 size_flags_horizontal = 4
 texture_normal = ExtResource( 5 )

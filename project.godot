@@ -18,10 +18,22 @@ _global_script_classes=[ {
 "class": "Popping",
 "language": "GDScript",
 "path": "res://asset/game/poping/poping.gd"
+}, {
+"base": "Node",
+"class": "WebGameGameData",
+"language": "GDScript",
+"path": "res://addons/web_game/game/WebGameGameData.gd"
+}, {
+"base": "Node",
+"class": "WebGameScoreData",
+"language": "GDScript",
+"path": "res://addons/web_game/score/WebGameScoreData.gd"
 } ]
 _global_script_class_icons={
 "Balloon": "",
-"Popping": ""
+"Popping": "",
+"WebGameGameData": "",
+"WebGameScoreData": ""
 }
 
 [application]
@@ -32,7 +44,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://asset/global.gd"
+WebGameModule="*res://addons/web_game/WebGameModule.gd"
 
 [display]
 
