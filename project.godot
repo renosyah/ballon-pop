@@ -30,6 +30,10 @@ config/name="ballon-pop"
 run/main_scene="res://asset/menu/menu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://asset/global.gd"
+
 [display]
 
 window/size/width=600
