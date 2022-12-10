@@ -1,9 +1,42 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://asset/ui/bg/bg.tscn" type="PackedScene" id=1]
 [ext_resource path="res://asset/ui/icon/back.png" type="Texture" id=2]
 [ext_resource path="res://asset/ui/fonts/montserrat_eb_48.tres" type="DynamicFont" id=3]
 [ext_resource path="res://asset/scoreboard/scoreboard.gd" type="Script" id=4]
+[ext_resource path="res://asset/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=5]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "..." ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "loading"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "...", ".", "..", "...", "..." ]
+}
 
 [node name="scoreboard" type="Node"]
 script = ExtResource( 4 )
@@ -93,13 +126,68 @@ rect_min_size = Vector2( 14, 0 )
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 margin_top = 104.0
 margin_right = 600.0
-margin_bottom = 900.0
+margin_bottom = 500.0
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 600.0
 size_flags_horizontal = 3
+
+[node name="loading_text" type="Label" parent="VBoxContainer"]
+margin_top = 504.0
+margin_right = 600.0
+margin_bottom = 900.0
+size_flags_vertical = 7
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+custom_fonts/font = ExtResource( 5 )
+text = "..."
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/loading_text"]
+autoplay = "loading"
+anims/RESET = SubResource( 1 )
+anims/loading = SubResource( 2 )
+
+[node name="error_text" type="Label" parent="VBoxContainer"]
+visible = false
+margin_top = 504.0
+margin_right = 600.0
+margin_bottom = 900.0
+size_flags_vertical = 7
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+custom_fonts/font = ExtResource( 5 )
+text = "Opps!
+
+Something wrong 
+is happend :("
+align = 1
+valign = 1
+
+[node name="empty_text" type="Label" parent="VBoxContainer"]
+visible = false
+margin_top = 504.0
+margin_right = 600.0
+margin_bottom = 900.0
+size_flags_vertical = 7
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+custom_fonts/font = ExtResource( 5 )
+text = "No data"
+align = 1
+valign = 1
 
 [node name="ui_panel2" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 904.0
@@ -182,6 +270,7 @@ margin_bottom = 120.0
 rect_min_size = Vector2( 14, 0 )
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+timeout = 5.0
 
 [connection signal="pressed" from="VBoxContainer/ui_panel/back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="VBoxContainer/ui_panel2/prev" to="." method="_on_prev_pressed"]
