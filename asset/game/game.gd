@@ -16,14 +16,13 @@ const BALLON_POPING_FRAGMENT =[
 	preload("res://asset/game/poping/star.png")
 ]
 
-onready var _spawn_position = $balloon_spawn_point
+onready var _spawn_position = $CanvasLayer/balloon_spawn_point
 onready var _timer = $Timer
-onready var _score = $ui_panel/score
-onready var _hp = $ui_panel/hp
-onready var _lose_panel = $lose_panel
-onready var _ui_panel = $ui_panel
-onready var _hurt = $hurt
-onready var _http_request = $HTTPRequest
+onready var _score = $CanvasLayer/ui_panel/score
+onready var _hp = $CanvasLayer/ui_panel/hp
+onready var _lose_panel = $CanvasLayer/lose_panel
+onready var _ui_panel = $CanvasLayer/ui_panel
+onready var _hurt = $CanvasLayer/hurt
 
 var balloon_pools :Array = []
 var popping_pools :Array = []
