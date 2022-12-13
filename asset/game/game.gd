@@ -19,8 +19,8 @@ const BALLON_POPING_FRAGMENT =[
 onready var _ballon_holder = $ballon_holder
 onready var _spawn_position = $CanvasLayer/balloon_spawn_point
 onready var _timer = $Timer
+onready var _ui_hp = $CanvasLayer/ui_panel/CenterContainer/ui_hp
 onready var _score = $CanvasLayer/ui_panel/score
-onready var _hp = $CanvasLayer/ui_panel/hp
 onready var _lose_panel = $CanvasLayer/lose_panel
 onready var _ui_panel = $CanvasLayer/ui_panel
 onready var _hurt = $CanvasLayer/hurt
@@ -30,13 +30,14 @@ var balloon_pools :Array = []
 var popping_pools :Array = []
 
 var score :int = 0
-var hp :int = 10
-var max_hp :int = 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_lose_panel.visible = false
 	_ui_panel.visible = true
+	
+	_ui_hp.max_hp = 5
+	_ui_hp.hp = 5
 	
 	randomize()
 	pooling_balloon()
@@ -48,11 +49,11 @@ func _ready():
 	
 func _on_Timer_timeout():
 	spawn_balloon(get_random_x())
-	_timer.wait_time = rand_range(0.5,0.8)
+	_timer.wait_time = rand_range(0.5,1.5)
 	_timer.start()
 	
 func pooling_balloon():
-	for i in range(40):
+	for i in range(30):
 		var balloon_instance :Balloon = baloon.instance()
 		balloon_instance.connect("on_ballon_pop", self, "_on_ballon_pop")
 		balloon_instance.connect("on_ballon_missed", self, "_on_ballon_missed")
@@ -60,7 +61,7 @@ func pooling_balloon():
 		balloon_pools.append(balloon_instance)
 	
 func pooling_poping():
-	for i in range(40):
+	for i in range(30):
 		var popping_instance :Popping = popping.instance()
 		add_child(popping_instance)
 		popping_pools.append(popping_instance)
@@ -102,22 +103,21 @@ func _on_ballon_missed(bal :Balloon):
 	if _lose_panel.visible:
 		return
 		
-	if hp < 2:
+	_ui_hp.hp -= 1
+	_hurt.show_hurt()
+	
+	if _ui_hp.hp < 1:
 		WebGameModule.update_scoreboard(score)
 		_lose_panel.visible = true
 		_ui_panel.visible = false
 		_timer.stop()
 		
-	else:
-		hp -= 1
-		_hurt.show_hurt()
-		
 	display_score()
 
 func display_score():
 	_score.text = "Score : " + str(score)
-	_hp.text = "Hp : " + str(hp)
-
+	_ui_hp.display()
+	
 func get_random_x():
 	var x = _spawn_position.rect_global_position.x
 	var y = _spawn_position.rect_global_position.y
@@ -130,7 +130,7 @@ func _on_TextureButton_pressed():
 
 func _on_try_again_pressed():
 	score = 0
-	hp = max_hp
+	_ui_hp.reset()
 	display_score()
 	_lose_panel.visible = false
 	_ui_panel.visible = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://asset/game/game.gd" type="Script" id=1]
 [ext_resource path="res://asset/ui/fonts/montserrat_eb_48.tres" type="DynamicFont" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://asset/ui/click_point/click_point.tscn" type="PackedScene" id=6]
 [ext_resource path="res://asset/ui/hurt/hurt.tscn" type="PackedScene" id=7]
 [ext_resource path="res://asset/ui/bg/bg.tscn" type="PackedScene" id=8]
+[ext_resource path="res://asset/ui/ui_hp/ui_hp.tscn" type="PackedScene" id=9]
 
 [node name="game" type="Node"]
 script = ExtResource( 1 )
@@ -28,53 +29,37 @@ anchor_right = 1.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 mouse_filter = 2
-alignment = 1
 
 [node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/ui_panel"]
 margin_right = 14.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 14, 0 )
 
-[node name="hp" type="Label" parent="CanvasLayer/ui_panel"]
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/ui_panel"]
 margin_left = 18.0
+margin_right = 18.0
+margin_bottom = 100.0
+size_flags_horizontal = 2
+
+[node name="ui_hp" parent="CanvasLayer/ui_panel/CenterContainer" instance=ExtResource( 9 )]
+margin_top = 35.0
+margin_bottom = 65.0
+
+[node name="score" type="Label" parent="CanvasLayer/ui_panel"]
+margin_left = 227.0
 margin_top = 30.0
-margin_right = 128.0
+margin_right = 372.0
 margin_bottom = 70.0
-rect_min_size = Vector2( 80, 0 )
+size_flags_horizontal = 0
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 custom_constants/shadow_as_outline = 1
 custom_fonts/font = ExtResource( 3 )
-text = "Hp : 10"
-
-[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/ui_panel"]
-margin_left = 132.0
-margin_right = 215.0
-margin_bottom = 100.0
-size_flags_horizontal = 3
-
-[node name="score" type="Label" parent="CanvasLayer/ui_panel"]
-margin_left = 219.0
-margin_top = 24.0
-margin_right = 410.0
-margin_bottom = 76.0
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 1
-custom_constants/shadow_as_outline = 1
-custom_fonts/font = ExtResource( 2 )
 text = "Score : 0"
 align = 1
 valign = 1
-
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/ui_panel"]
-margin_left = 414.0
-margin_right = 498.0
-margin_bottom = 100.0
-size_flags_horizontal = 3
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/ui_panel"]
 margin_left = 502.0
@@ -82,6 +67,7 @@ margin_top = 10.0
 margin_right = 582.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 80, 80 )
+size_flags_horizontal = 10
 size_flags_vertical = 4
 texture_normal = ExtResource( 4 )
 expand = true
