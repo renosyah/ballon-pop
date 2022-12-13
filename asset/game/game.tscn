@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://asset/game/game.gd" type="Script" id=1]
 [ext_resource path="res://asset/ui/fonts/montserrat_eb_48.tres" type="DynamicFont" id=2]
 [ext_resource path="res://asset/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=3]
 [ext_resource path="res://asset/game/pause.png" type="Texture" id=4]
 [ext_resource path="res://asset/menu/play.png" type="Texture" id=5]
+[ext_resource path="res://asset/ui/click_point/click_point.tscn" type="PackedScene" id=6]
 [ext_resource path="res://asset/ui/hurt/hurt.tscn" type="PackedScene" id=7]
 [ext_resource path="res://asset/ui/bg/bg.tscn" type="PackedScene" id=8]
 
@@ -26,6 +27,7 @@ margin_bottom = 89.0
 anchor_right = 1.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
+mouse_filter = 2
 alignment = 1
 
 [node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/ui_panel"]
@@ -153,6 +155,11 @@ __meta__ = {
 [node name="hurt" parent="CanvasLayer" instance=ExtResource( 7 )]
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="ballon_holder" type="Node2D" parent="."]
+
+[node name="click_point" parent="." instance=ExtResource( 6 )]
+z_index = 2
 
 [connection signal="pressed" from="CanvasLayer/ui_panel/TextureButton" to="." method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/lose_panel/try_again" to="." method="_on_try_again_pressed"]

@@ -16,6 +16,7 @@ const BALLON_POPING_FRAGMENT =[
 	preload("res://asset/game/poping/star.png")
 ]
 
+onready var _ballon_holder = $ballon_holder
 onready var _spawn_position = $CanvasLayer/balloon_spawn_point
 onready var _timer = $Timer
 onready var _score = $CanvasLayer/ui_panel/score
@@ -23,6 +24,7 @@ onready var _hp = $CanvasLayer/ui_panel/hp
 onready var _lose_panel = $CanvasLayer/lose_panel
 onready var _ui_panel = $CanvasLayer/ui_panel
 onready var _hurt = $CanvasLayer/hurt
+onready var _click_point = $click_point
 
 var balloon_pools :Array = []
 var popping_pools :Array = []
@@ -46,19 +48,19 @@ func _ready():
 	
 func _on_Timer_timeout():
 	spawn_balloon(get_random_x())
-	_timer.wait_time = rand_range(0.5,1.5)
+	_timer.wait_time = rand_range(0.5,0.8)
 	_timer.start()
 	
 func pooling_balloon():
-	for i in range(20):
+	for i in range(40):
 		var balloon_instance :Balloon = baloon.instance()
 		balloon_instance.connect("on_ballon_pop", self, "_on_ballon_pop")
 		balloon_instance.connect("on_ballon_missed", self, "_on_ballon_missed")
-		_spawn_position.add_child(balloon_instance)
+		_ballon_holder.add_child(balloon_instance)
 		balloon_pools.append(balloon_instance)
 	
 func pooling_poping():
-	for i in range(20):
+	for i in range(40):
 		var popping_instance :Popping = popping.instance()
 		add_child(popping_instance)
 		popping_pools.append(popping_instance)
@@ -71,7 +73,7 @@ func spawn_balloon(from :Vector2):
 			balloon_pool.face_texture = BALLON_FACES[rand_range(0, BALLON_FACES.size())]
 			balloon_pool.color = Color(randf(), randf(), randf(), 1)
 			balloon_pool.hp = int(rand_range(2, 6))
-			balloon_pool.speed = rand_range(100, 300)
+			balloon_pool.speed = rand_range(100, 400)
 			balloon_pool.launch()
 			return
 	
@@ -87,12 +89,15 @@ func spawn_poping_fragment(color :Color, from:Vector2):
 			popping_pool.pop()
 			return
 			
-func _on_ballon_pop(bal :Balloon):
+func _on_ballon_pop(bal :Balloon, click_pos : Vector2):
 	if bal.is_dead:
 		score += 1
 		display_score()
-		spawn_poping_fragment(bal.color, bal.global_position)
- 
+		
+	spawn_poping_fragment(bal.color, bal.global_position)
+	_click_point.position = click_pos
+	_click_point.click()
+
 func _on_ballon_missed(bal :Balloon):
 	if _lose_panel.visible:
 		return

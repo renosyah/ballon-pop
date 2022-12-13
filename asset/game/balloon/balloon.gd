@@ -1,7 +1,7 @@
 extends Area2D
 class_name Balloon
 
-signal on_ballon_pop(baloon)
+signal on_ballon_pop(baloon, click_pos)
 signal on_ballon_missed(baloon)
 
 const pop = preload("res://asset/game/balloon/balloon-pop.wav")
@@ -65,7 +65,7 @@ func _on_balloon_input_event(viewport, event, shape_idx):
 		_tween.interpolate_property(_ballon,"scale" ,Vector2.ONE * 0.8, Vector2.ONE * 1, 0.4, Tween.TRANS_BOUNCE)
 		_tween.start()
 		
-		emit_signal("on_ballon_pop", self)
+		emit_signal("on_ballon_pop", self, event.position)
 		
 func _on_VisibilityNotifier2D_screen_exited():
 	if is_dead:
@@ -78,5 +78,8 @@ func _on_VisibilityNotifier2D_screen_exited():
 	set_dead()
 	emit_signal("on_ballon_missed", self)
 	
+
+
+
 
 
