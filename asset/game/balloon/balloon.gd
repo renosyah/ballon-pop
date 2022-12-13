@@ -38,10 +38,24 @@ func launch():
 	set_process(true)
 
 func set_dead():
+	if not _audio.playing:
+		_audio.stream = pop
+		_audio.play()
+		
 	is_dead = true
 	visible = false
 	set_process(false)
-
+	
+func make_pop(at :Vector2):
+	if not _audio.playing:
+		_audio.stream = click
+		_audio.play()
+		
+	_tween.interpolate_property(_ballon,"scale" ,Vector2.ONE * 0.8, Vector2.ONE * 1, 0.4, Tween.TRANS_BOUNCE)
+	_tween.start()
+	
+	emit_signal("on_ballon_pop", self, at)
+	
 func _on_balloon_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.is_action_pressed("left_click"):
 		if is_dead:
@@ -52,20 +66,7 @@ func _on_balloon_input_event(viewport, event, shape_idx):
 		if hp < 1:
 			set_dead()
 			
-			if not _audio.playing:
-				_audio.stream = pop
-				_audio.play()
-			
-		else:
-			
-			if not _audio.playing:
-				_audio.stream = click
-				_audio.play()
-				
-		_tween.interpolate_property(_ballon,"scale" ,Vector2.ONE * 0.8, Vector2.ONE * 1, 0.4, Tween.TRANS_BOUNCE)
-		_tween.start()
-		
-		emit_signal("on_ballon_pop", self, event.position)
+		make_pop(event.position)
 		
 func _on_VisibilityNotifier2D_screen_exited():
 	if is_dead:

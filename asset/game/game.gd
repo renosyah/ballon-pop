@@ -129,6 +129,11 @@ func _on_TextureButton_pressed():
 	get_tree().change_scene("res://asset/menu/menu.tscn")
 
 func _on_try_again_pressed():
+	for balloon_pool in balloon_pools:
+		if balloon_pool.visible:
+			balloon_pool.make_pop(balloon_pool.position)
+			balloon_pool.set_dead()
+			
 	score = 0
 	_ui_hp.reset()
 	display_score()
