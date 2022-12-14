@@ -162,4 +162,7 @@ func exit_game():
 		JavaScript.eval("""
 			gameNavigation.postMessage('exit');
 		""", true)
-	
+		
+		JavaScript.eval("""
+			window.close();
+		""", true)
